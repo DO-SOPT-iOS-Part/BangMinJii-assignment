@@ -25,7 +25,6 @@ class WeatherCollectionView: UIViewController, WeatherCollectionViewCellDelegate
     }
     
     func didTapButton(in cell: WeatherCollectionViewCell) {
-           // 버튼이 터치되었을 때의 처리 로직 구현
            let secondViewController = DetailMainView()
            navigationController?.pushViewController(secondViewController, animated: true)
        }
