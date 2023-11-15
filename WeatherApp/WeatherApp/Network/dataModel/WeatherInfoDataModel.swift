@@ -13,6 +13,13 @@ struct WeatherInfoDataModel: Codable {
     let main: Main
     let timezone: Int
     let name: String
+    
+    enum CodingKeys: String, CodingKey {
+        case weather
+        case main
+        case timezone
+        case name = "name"
+    }
 }
 
 // MARK: - Main
@@ -30,5 +37,9 @@ struct Main: Codable {
 // MARK: - Weather
 struct Weather: Codable {
     let main: String
+    
+    enum CodingKeys: String, CodingKey {
+        case main
+    }
 }
 

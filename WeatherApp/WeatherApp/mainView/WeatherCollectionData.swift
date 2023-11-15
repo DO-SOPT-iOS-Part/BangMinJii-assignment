@@ -13,18 +13,18 @@ struct WeatherCollectionData {
     let state: String
     let time: String
     let location: String
-    let temp: String
-    let highTemp: String
-    let lowTemp: String
+    let temp: Int
+    let highTemp: Int
+    let lowTemp: Int
     
     
-    init(weatherInfo: WeatherInfoDataModel) {
-            self.state = weatherInfo.weather.first?.main ?? ""
-            self.time = makeTimeZoneToTime(timeZone: weatherInfo.timezone)
-            self.location = weatherInfo.name
-            self.temp = String(weatherInfo.main.temp)
-            self.highTemp = String(weatherInfo.main.tempMax)
-            self.lowTemp = String(weatherInfo.main.tempMin)
+    init(state: String, time: String, location: String, temp: Int, highTemp: Int, lowTemp: Int) {
+            self.state = state
+            self.time = time
+            self.location = location
+            self.temp = temp
+            self.highTemp = highTemp
+            self.lowTemp = lowTemp
         }
 }
 
@@ -36,4 +36,15 @@ func makeTimeZoneToTime(timeZone: Int) -> String {
         dateFormatter.timeZone = TimeZone(secondsFromGMT: timeZone)
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: today)
+    }
+
+func translateCityNameToKorean(name: String) -> String {
+        let translations: [String: String] = [
+            "Seoul": "서울",
+            "Jeju City": "제주도",
+            "Iksan": "익산",
+            "Suwon-si": "수원",
+            "Busan": "부산"
+        ]
+        return translations[name] ?? name
     }

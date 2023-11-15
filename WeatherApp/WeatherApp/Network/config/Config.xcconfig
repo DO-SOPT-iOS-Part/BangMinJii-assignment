@@ -9,5 +9,5 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 
-BASE_URL = https:/{$()}/api.openweathermap.org
+BASE_URL = api.openweathermap.org
 API_KEY = 5df5d401b8090656aa19e6aa31385986

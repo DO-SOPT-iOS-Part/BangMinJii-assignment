@@ -13,8 +13,8 @@ class GetWeatherInfoService {
         func makeRequest(name: String) -> URLRequest {
             let baseURL = Bundle.main.object(forInfoDictionaryKey: Config.Keys.Plist.baseURL) as? String ?? ""
             let myAPI = Bundle.main.object(forInfoDictionaryKey: Config.Keys.Plist.myAPI) as? String ?? ""
-            
-            let url = URL(string: baseURL + "/data/2.5/weather?q=\(name)&units=metric&lang=kr&&appid=" + myAPI)!
+            let url = URL(string: "https://" + baseURL + "/data/2.5/weather?q=\(name)&units=metric&lang=kr&appid=" + myAPI)!
+            print(url)
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             let header = ["Content-Type": "application/json"]
@@ -24,19 +24,23 @@ class GetWeatherInfoService {
             return request
         }
     
-        func GetWeatherData(name: String) async throws -> WeatherInfoDataModel? {
+        func GetWeatherData(name: String) async throws -> WeatherInfoDataModel {
             do {
                 let request = self.makeRequest(name: name)
                 let (data, response) = try await URLSession.shared.data(for: request)
                 dump(request)
-                guard let httpResponse = response as? HTTPURLResponse else {
+                guard response is HTTPURLResponse else {
                     throw NetworkError.responseError
                 }
                 dump(response)
-                return parseWeatherInfoData(data: data)
-            } catch {
-                throw error
-            }
+                guard let parseData = parseWeatherInfoData(data: data)
+                            else {
+                                throw NetworkError.responseDecodingError
+                            }
+                            return parseData
+                        } catch {
+                            throw error
+                        }
         }
     
         private func parseWeatherInfoData(data: Data) -> WeatherInfoDataModel? {
