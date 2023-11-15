@@ -110,35 +110,3 @@ extension DetailMakeCollectionViewCell: UICollectionViewDataSource {
         return item
     }
 }
-
-
-//    private var stateLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "08:00~09:00에 강우 상태가, 18:00에 한때 흐린 상태가 예상됩니다."
-//        label.widthAnchor.constraint(equalToConstant: 305).isActive = true
-//        label.textColor = .white
-//        label.font = .sfPro(size: 18, weight: .regular)
-//        label.numberOfLines = 0
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.adjustsFontSizeToFitWidth = true
-//        return label
-//    }()
-
-
-//    private var line: UIView = {
-//        let line = UIView()
-//        line.alpha = 0.2
-//        line.backgroundColor = UIColor.white
-//        line.heightAnchor.constraint(equalToConstant: 1).isActive = true
-//        return line
-//    }()
-
-//    private var weatherbox: UIStackView = {
-//        let view = UIStackView()
-//        view.axis = .vertical
-//        view.layer.backgroundColor = UIColor.clear.cgColor
-//        view.layer.cornerRadius = 15
-//        view.layer.borderWidth = 0.5
-//        view.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.25).cgColor
-//        return view
-//    }()
