@@ -13,11 +13,9 @@ class DetailCollectionViewCell: UICollectionViewCell {
     
     static let identifier: String = "DetailCollectionViewCell"
     
-    //private var itemRow: Int?
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setLayout()
-        //self.backgroundColor = .blue
     }
     
     required init?(coder: NSCoder) {

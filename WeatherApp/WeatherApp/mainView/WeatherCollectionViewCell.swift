@@ -54,17 +54,17 @@ class WeatherCollectionViewCell: UICollectionViewCell {
             }
             
             temp.snp.makeConstraints {
-                $0.left.equalTo(backgroundSmall.snp.left).offset(249)
+                $0.trailing.equalTo(backgroundSmall.snp.trailing).inset(16)
                 $0.top.equalTo(backgroundSmall.snp.top).offset(4)
             }
             
             highTemp.snp.makeConstraints {
-                $0.left.equalTo(backgroundSmall.snp.left).offset(196)
+                $0.trailing.equalTo(lowTemp.snp.leading).offset(-6)
                 $0.top.equalTo(backgroundSmall.snp.top).offset(87)
             }
             
             lowTemp.snp.makeConstraints {
-                $0.left.equalTo(backgroundSmall.snp.left).offset(262)
+                $0.trailing.equalTo(backgroundSmall.snp.trailing).inset(16)
                 $0.top.equalTo(backgroundSmall.snp.top).offset(87)
             }
         }
@@ -111,9 +111,8 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         self.location.text = data.location
         self.time.text = data.time
         self.state.text = data.state
-        self.temp.text = data.temp
-        self.highTemp.text = data.highTemp
-        self.lowTemp.text = data.lowTemp
+        self.temp.text = String(data.temp) + "º"
+        self.highTemp.text = "최고:" + String(data.highTemp) + "º"
+        self.lowTemp.text = "최저:" + String(data.lowTemp) + "º"
         }
 }
-

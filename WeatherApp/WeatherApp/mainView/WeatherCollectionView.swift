@@ -14,6 +14,9 @@ class WeatherCollectionView: UIViewController, WeatherCollectionViewCellDelegate
     let weatherCell = WeatherCollectionViewCell()
     override func viewDidLoad() {
         super.viewDidLoad()
+        Task{
+            await fetchData()
+        }
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -25,7 +28,6 @@ class WeatherCollectionView: UIViewController, WeatherCollectionViewCellDelegate
     }
     
     func didTapButton(in cell: WeatherCollectionViewCell) {
-           // 버튼이 터치되었을 때의 처리 로직 구현
            let secondViewController = DetailMainView()
            navigationController?.pushViewController(secondViewController, animated: true)
        }
@@ -63,6 +65,29 @@ class WeatherCollectionView: UIViewController, WeatherCollectionViewCellDelegate
         flowlayout.minimumLineSpacing = 16
         self.collectionView.setCollectionViewLayout(flowlayout, animated: false)
     }
+    
+    func fetchData() async {
+        let cities = ["seoul", "jeju", "iksan", "suwon", "busan"]
+        for city in cities {
+            do {
+                let weatherData = try await GetWeatherInfoService.shared.GetWeatherData(name: city)
+                let weatherInfo: WeatherCollectionData = WeatherCollectionData (
+                    state: weatherData.weather[0].main,
+                    time: makeTimeZoneToTime(timeZone: weatherData.timezone),
+                    location: translateCityNameToKorean(name: weatherData.name),
+                    temp: Int(weatherData.main.temp),
+                    highTemp: Int(weatherData.main.tempMax),
+                    lowTemp: Int(weatherData.main.tempMin)
+                )
+                weatherCollectionData.append(weatherInfo)
+            }
+            catch {
+                print("날씨 데이터를 가져오는 중 오류 발생: \(error)")
+            }
+        }
+        collectionView.reloadData()
+    }
+
 }
 
 extension WeatherCollectionView: UICollectionViewDelegateFlowLayout {

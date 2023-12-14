@@ -39,7 +39,6 @@ class DetailMainView: UIViewController {
         view.axis = .horizontal
         view.layer.backgroundColor = UIColor.clear.cgColor
         view.layer.borderWidth = 0.5
-        //view.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.25).cgColor
         view.layer.backgroundColor = UIColor(red: 0.165, green: 0.188, blue: 0.251, alpha: 1).cgColor
         return view
     }()
@@ -131,7 +130,6 @@ class DetailMainView: UIViewController {
     
     private func setCollectionViewLayout() {
         let flowlayout = UICollectionViewFlowLayout()
-        //flowlayout.minimumLineSpacing = 16
         self.collectionView.setCollectionViewLayout(flowlayout, animated: false)
     }
 }
@@ -154,7 +152,6 @@ extension DetailMainView: UICollectionViewDelegateFlowLayout {
 
 extension DetailMainView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // 섹션의 개수를 반환
         return 3
     }
     
